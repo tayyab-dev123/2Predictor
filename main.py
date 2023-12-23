@@ -134,7 +134,7 @@ def Predictor():
     st.write("Prediction", prediction)
     st.write("__________________________")
 
-    st.write('<p style="color:Blue; font-size: 50px font-weight: bold;">Prediction Visualization</p>', unsafe_allow_html=True)
+    st.write('<p style="color:Blue; font-size: 50px font-weight: bold;">SARIMA Prediction Visualization</p>', unsafe_allow_html=True)
 
     #lets plot the prediction
     fig=go.Figure()
@@ -170,11 +170,11 @@ def Predictor():
     model.add(Dense(1))
     model.compile(optimizer='adam', loss='mse')
 
-    # Train the model
-    # model.fit(generator, epochs=200, batch_size=8)  # Increase epochs and decrease batch size
+    #Train the model
+    model.fit(generator, epochs=200, batch_size=8)  # Increase epochs and decrease batch size
     # model.save('lstm_model.h5')
     
-    model = load_model('lstm_model.h5')
+    # model = load_model('lstm_model.h5')
 
     # Predict the future values
     pred_list = []
@@ -342,6 +342,7 @@ def Simulator():
 
         # plot sharpe ratio
         st.write("Portfolio Annual Sharpe Ratio (Baseline = 1)")
+        st.write('Red line represents sharpe ratio if graph is is above red line, it shows high profit and high risk and if it graph is below than red line it shows low profit and low risk.')
         fig = px.line(
             sharpe.tail(st.session_state.window_size), x="Date", y="sharpe_ratio_annual"
         )
@@ -406,7 +407,7 @@ def Simulator():
 
         # general layout settings
         
-        st.title("ETF Portfolio Simulator")
+        st.title("Coin Value Graphs")
 
         # load sharpe, stocks, and ratio pickles
         sharpe, stocks, ratio = read_stock_data_from_local()
